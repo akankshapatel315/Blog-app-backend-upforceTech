@@ -5,8 +5,8 @@ function connectDB() {
   const url = "mongodb+srv://akankshapatel315:Ak%40nkshaisthebest@cluster0.8am0v.mongodb.net/blog-app"
   try {
     mongoose.connect(url, {
-      useNewUrlParser: true, 
-      useUnifiedTopology: true ,
+      // useNewUrlParser: true, 
+      // useUnifiedTopology: true ,
       serverSelectionTimeoutMS: 20000, 
       socketTimeoutMS: 45000 
     }).then((res: any) => {
