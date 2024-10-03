@@ -3,21 +3,21 @@ const blogController = require("../Controllers/blogController");
 const blogRouter = expressServer.Router();
 const tokenauth = require("../middleware/authJWT");
 
-// Route for creating a todo
 blogRouter.use(expressServer.json());
+
 blogRouter.post(
   "/addArticle",
-  // tokenauth.verifyToken,
+  tokenauth.verifyToken,
   blogController.addArticle
 );
 blogRouter.get(
   "/getAllArticlesOfLoggedInUser",
-  // tokenauth.verifyToken,
+  tokenauth.verifyToken,
   blogController.getAllArticlesByUser
 );
 blogRouter.patch(
   "/updateArticle/:id",
-  // tokenauth.verifyToken,
+  tokenauth.verifyToken,
   blogController.updateArticle
 );
 blogRouter.get(
@@ -28,15 +28,10 @@ blogRouter.get(
 
 blogRouter.delete(
   "/deleteBlogs/:_id",
-  // tokenauth.verifyToken,
+  tokenauth.verifyToken,
   blogController.deleteArticles
 );
 
-blogRouter.get(
-  "/getAllArticles",
-  tokenauth.verifyToken,
-  blogController.getAllArticles
-);
 
 
 module.exports = blogRouter;

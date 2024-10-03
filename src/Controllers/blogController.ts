@@ -1,10 +1,9 @@
 const Blog = require("../Models/blogModel");
-const authentication = require("../middleware/authJWT");
-
+import mongoose from "mongoose";
 const addArticle = async (req: any, res: any) => {
   try {
     const { title, content, userId } = req.body;
-    const createdBy = req.body.userId || "90909";
+    const createdBy = req.body.userId ;
     const newBlog = await new Blog({
       title,
       content,
@@ -21,7 +20,7 @@ const addArticle = async (req: any, res: any) => {
 const getAllArticlesByUser = async (req: any, res: any) => {
   try {
     const userId = req.body.userId;
-    const articles = await Blog.find({ createdUserId: userId });
+    const articles = await Blog.find({ createdBy: new mongoose.Types.ObjectId(userId) });
     res.status(200).send({ articles, message: "Blogs are fetched successfully" });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
