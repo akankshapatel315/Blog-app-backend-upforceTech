@@ -1,4 +1,4 @@
-const mongoosee = require("mongoose");
+import mongoose from "mongoose";
 const User = require("../Models/userModel");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");

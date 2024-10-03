@@ -6,7 +6,7 @@ var blogSchema = new DB.Schema({
     unique: false,
     required: true,
   },
-  description: {
+  content: {
     type: String,
     required: true,
   },
@@ -14,7 +14,7 @@ var blogSchema = new DB.Schema({
     type: String,
     required: true,
   },
-  createdUserId: {
+  createdBy: {
     type: String,
     required: true,
   },
