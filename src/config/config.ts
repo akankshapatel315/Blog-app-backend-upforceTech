@@ -3,7 +3,7 @@ const path = require("path");
 
 dotenv.config({
   path: path.resolve(
-   "BlogApp-BE/",
+   "Backend-Blog-app/",
     `${process.env.NODE_ENV}.env`
   ),
 });
