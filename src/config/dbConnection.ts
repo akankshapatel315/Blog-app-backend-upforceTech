@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 function connectDB() {
   // const url = "mongodb://localhost:27017/BlogApp";
+  mongoose.set('strictQuery', true);
   const url = "mongodb+srv://akankshapatel315:Ak%40nkshaisthebest@cluster0.8am0v.mongodb.net/blog-app"
   try {
     mongoose.connect(url, {
