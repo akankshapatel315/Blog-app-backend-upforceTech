@@ -7,17 +7,17 @@ const tokenauth = require("../middleware/authJWT");
 blogRouter.use(expressServer.json());
 blogRouter.post(
   "/addArticle",
-  tokenauth.verifyToken,
+  // tokenauth.verifyToken,
   blogController.addArticle
 );
 blogRouter.get(
   "/getAllArticlesOfLoggedInUser",
-  tokenauth.verifyToken,
+  // tokenauth.verifyToken,
   blogController.getAllArticlesByUser
 );
-blogRouter.post(
-  "/updateArticle",
-  tokenauth.verifyToken,
+blogRouter.patch(
+  "/updateArticle/:id",
+  // tokenauth.verifyToken,
   blogController.updateArticle
 );
 blogRouter.get(
@@ -28,7 +28,7 @@ blogRouter.get(
 
 blogRouter.delete(
   "/deleteBlogs/:_id",
-  tokenauth.verifyToken,
+  // tokenauth.verifyToken,
   blogController.deleteArticles
 );
 

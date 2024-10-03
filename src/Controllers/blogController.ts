@@ -3,13 +3,12 @@ const authentication = require("../middleware/authJWT");
 
 const addArticle = async (req: any, res: any) => {
   try {
-    const { title, description, category, userId } = req.body;
-    const createdUserId = req.body.userId;
+    const { title, content, userId } = req.body;
+    const createdBy = req.body.userId || "90909";
     const newBlog = await new Blog({
       title,
-      description,
-      category,
-      createdUserId,
+      content,
+      createdBy,
     });
     await Blog.create(newBlog);
 
@@ -21,20 +20,19 @@ const addArticle = async (req: any, res: any) => {
 
 const getAllArticlesByUser = async (req: any, res: any) => {
   try {
-    const userId = req.body.userId; // Assuming userId is the field containing the user's ID
-    const articles = await Blog.find({ createdUserId: userId }); // Query for articles based on the user's ID
-    console.log(articles,"-------------")
+    const userId = req.body.userId;
+    const articles = await Blog.find({ createdUserId: userId });
     res.status(200).send({ articles, message: "Blogs are fetched successfully" });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
 
 const getAllArticles = async (req: any, res: any) => {
   try {
-    const articles = await Blog.find(); // Query for articles based on the user's ID
+    const articles = await Blog.find();
     res.status(200).send({ articles, message: "Blogs are fetched successfully" });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -54,24 +52,28 @@ const getArticleByUser = async (req: any, res: any) => {
   try {
     const id = req.query._id;
     const result = await Blog.find(id);
-    if(!result)
-      {
+    if (!result) {
       res.status(200).send("Not Found Blog");
-      }
+    }
     res.status(200).send(result);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 const updateArticle = async (req: any, res: any) => {
   try {
-    const id = req.body._id;
+    const id = req.params._id;
     const updatedData = req.body;
-    const result = await Blog.findByIdAndUpdate(id, updatedData);
+    const result = await Blog.findByIdAndUpdate({ _id: updatedData.id },
+      {
+        title: updatedData.title,
+        content: updatedData.content,
+        updatedAt: new Date()
+      });
     res.status(200).send(result);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
-module.exports = { addArticle, getAllArticlesByUser, deleteArticles, updateArticle,getAllArticles };
+module.exports = { addArticle, getAllArticlesByUser, deleteArticles, updateArticle, getAllArticles };

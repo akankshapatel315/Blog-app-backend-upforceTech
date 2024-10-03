@@ -10,7 +10,6 @@ const addUser = async (req: any, res: any) => {
     const result = await User.create(user);
     res.send(`${result.firstName} successfully created!!`);
   } catch (err: any) {
-    console.log('err', err)
     res.status(500).send(err.message);
   }
 };
@@ -55,16 +54,6 @@ const login = async (req: any, res: any) => {
   }
 };
 
-const getListOfUser = async (req: any, res: any) => {
-  try {
-    const getAllUsers = await User.find({});
-    if (getAllUsers) {
-      res.status(200).send(getAllUsers);
-    } else {
-    }
-  } catch (error: any) {
-    res.status(500).send(error.message);
-  }
-};
 
-module.exports = { addUser, login, getListOfUser };
+
+module.exports = { addUser, login };
