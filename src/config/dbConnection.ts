@@ -13,7 +13,7 @@ function connectDB() {
       console.log("connected MongoDB")
     });
   } catch (err: any) {
-    console.error(err.message);
+    console.error("error while connecting database",err.message);
     process.exit(1);
   }
 }
